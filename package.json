@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "async": "^2.0.0-rc.4",
+    "express": "^4.13.4",
+    "mkdirp": "^0.5.1",
+    "prompt": "^1.0.0"
   },
   "devDependencies": {
     "jest": "^0.1.40",
