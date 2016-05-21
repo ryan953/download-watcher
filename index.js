@@ -73,17 +73,11 @@ function init() {
       } else {
         const promises = toMove
           .map((fileObject) => {
-            const promise = args.indexOf('test') !== -1
-              ? Filesystem.testMoveFrom(
-                fileObject.file,
-                fileObject.path,
-                fileObject.type.tvFolder
-              )
-              : Filesystem.moveFrom(
-                fileObject.file,
-                fileObject.path,
-                fileObject.type.tvFolder
-              );
+            const promise = Filesystem.moveFrom(
+              fileObject.file,
+              fileObject.path,
+              fileObject.type.tvFolder
+            );
 
             return promise.then(() => {
               moveCount += 1;
