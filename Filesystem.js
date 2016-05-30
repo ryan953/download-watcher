@@ -89,7 +89,6 @@ const Filesystem = {
         {}
       ).then(
         () => {
-          fs.rmdirSync(oldPath);
           callback(null);
         },
         (err) => callback(err)

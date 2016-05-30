@@ -4,6 +4,7 @@ const Detector = require('./Detector');
 const Filesystem = require('./Filesystem');
 const User = require('./User');
 
+const async = require('async');
 const config = require('./config');
 
 const args = Array.prototype.slice.call(process.argv, 2);
@@ -71,24 +72,26 @@ function init() {
         console.log('');
         console.log('-- no files to move --');
       } else {
-        const promises = toMove
-          .map((fileObject) => {
-            const promise = Filesystem.moveFrom(
+        async.mapSeries(
+          toMove,
+          (fileObject, callback) => {
+            Filesystem.moveFrom(
               fileObject.file,
               fileObject.path,
               fileObject.type.destFolder
-            );
-
-            return promise.then(() => {
+            ).then(() => {
               moveCount += 1;
               console.log(`${moveCount}/${toMove.length} done`);
+              callback(null, moveCount);
+            }, (err) => {
+              callback(err, null);
             });
-          });
-
-        Promise.all(promises).then(() => {
-          console.log('');
-          console.log('Done all moves');
-        });
+          },
+          (err, results) => {
+            console.log('');
+            console.log('Done all moves');
+          }
+        );
       }
     });
   });
