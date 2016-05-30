@@ -43,6 +43,13 @@ function tvFolder(file) {
   return `${config.dest_tv}/${name}/Season - ${season}`;
 }
 
+function movieFolder(file) {
+  if (isTV(file)) {
+    return null;
+  }
+  return config.dest_movie;
+}
+
 module.exports = {
 
   type: function(file) {
@@ -52,6 +59,10 @@ module.exports = {
       tvName: tvName(file),
       tvSeason: tvSeason(file),
       tvFolder: tvFolder(file),
+      movieFolder: movieFolder(file),
+      destFolder: isTV(file)
+        ? tvFolder(file)
+        : movieFolder(file),
     };
   },
 

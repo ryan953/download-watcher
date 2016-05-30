@@ -45,7 +45,7 @@ module.exports = {
           console.log('');
           console.log('Move', fileObject.file);
           console.log('from', "\t", fileObject.path);
-          console.log('to', "\t", fileObject.type.tvFolder);
+          console.log('to', "\t", fileObject.type.destFolder);
 
           askForAccept()
             .then((accepted) => {

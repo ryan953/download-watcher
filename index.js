@@ -41,7 +41,7 @@ function init() {
       results,
       'TV',
       isTVFilter,
-      (fileObject) => `${fileObject.file}\t${fileObject.type.tvFolder}`
+      (fileObject) => `${fileObject.file}\t${fileObject.type.destFolder}`
     );
 
     printSection(
@@ -54,7 +54,7 @@ function init() {
     console.log('');
 
     User.collectDescisions(
-      results.filter(isTVFilter)
+      results
     ).then((items) => {
       console.log('');
       const toMove = items
@@ -76,7 +76,7 @@ function init() {
             const promise = Filesystem.moveFrom(
               fileObject.file,
               fileObject.path,
-              fileObject.type.tvFolder
+              fileObject.type.destFolder
             );
 
             return promise.then(() => {
