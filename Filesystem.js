@@ -82,13 +82,13 @@ const Filesystem = {
           '--recursive',
           '--verbose',
           '--itemize-changes',
-          '--remove-source-files',
           oldPath,
           newPath
         ],
         {}
       ).then(
         () => {
+          fs.unlinkSync(oldPath);
           callback(null);
         },
         (err) => callback(err)
