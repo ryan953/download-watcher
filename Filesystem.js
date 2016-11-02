@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const mkdirp = require('mkdirp')
 const path = require('path');
 const spawn = require('child_process').spawn;
@@ -88,7 +88,7 @@ const Filesystem = {
         {}
       ).then(
         () => {
-          fs.unlinkSync(oldPath);
+          fs.remove(oldPath);
           callback(null);
         },
         (err) => callback(err)
